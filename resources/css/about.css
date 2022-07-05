@@ -1,0 +1,23 @@
+h5{
+    padding-bottom: 10px;
+}
+.container-title{
+    max-width: 1260px!important;
+    min-height: calc(100vh - 110px);
+}
+.container-body{
+    max-width: 1080px!important;
+}
+h3{
+    text-align: center;
+}
+p{
+    font-size: x-large;
+}
+.para{
+    display: flex;
+}
+.content{
+    font-size: large;
+    margin-right: 10px;
+}
