@@ -1,17 +1,19 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import '../css/app.css';
+import NavBar from './components/NavBar';
+import About from './pages/About';
+import Home from './pages/Home';
+
+
 
 class Welcome extends Component {
     render() {
         return (
-            <main>
-                <section className="content">
-                    <div className="small-welcome-text">AMA</div>
-                    <div className="welcome-text">
-                        Welcome to <span>B</span>ook <span>W</span>orm
-                    </div>
-                </section>
-            </main>
+                <Routes>
+                    <Route path='/about' element={<About/>} />
+                    <Route path='/' element={<Home/>} />
+                </Routes>
         );
     }
 }
