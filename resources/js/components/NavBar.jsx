@@ -1,5 +1,5 @@
 import { Navbar, Container, Nav } from 'react-bootstrap';
-
+import Logo from '../../assets/bookworm_icon.svg'
 
 import React from 'react'
 
@@ -8,7 +8,9 @@ export default function NavBar() {
         <>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light" sticky='top'>
                 <Container>
-                    <Navbar.Brand href="/"><b>BOOKWORM</b></Navbar.Brand>
+                    <Navbar.Brand href="/">
+                        <img src={Logo} alt="Kiwi standing on oval" />
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav" className='justify-content-end'>
                         <Nav className="ml-auto">
@@ -21,7 +23,7 @@ export default function NavBar() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            
+
         </>
 
     )
