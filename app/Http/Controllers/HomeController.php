@@ -24,7 +24,7 @@ class HomeController extends Controller
     }
     public function getRecommendedBook()
     {
-        return response($this->_bookRepository->getRecommendedBook()->get());
+        return response($this->_bookRepository->getRecommendedBook()->limit(8)->get());
     }
     public function getPopularBook()
     {
