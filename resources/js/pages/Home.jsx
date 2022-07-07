@@ -5,8 +5,9 @@ import Footer from '../components/Footer';
 import GetSaleBook from '../components/home/GetSaleBook';
 import GetRecommendBook from '../components/home/GetRecommendBook';
 import GetPopularBook from '../components/home/GetPopularBook';
-import { Container } from 'react-bootstrap';
+import { Container, ToggleButton } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/esm/ButtonGroup';
+
 
 
 export default function Home() {
@@ -37,7 +38,7 @@ export default function Home() {
         console.error(err);
       }
     };
-    if (mode == 'recommended') {
+    if (mode === 'recommended') {
       sendGetRequestRec()
     }
     else {
@@ -51,14 +52,15 @@ export default function Home() {
       <br /><br />
       <GetSaleBook />
       <br /><br /><br />
-      <Container >
+      <Container className='d-flex justify-content-center'>
         <ButtonGroup size="lg" className="md-2">
+          
           <Button onClick={(e) => {
             setMode('recommended')
-          }} variant="secondary">Recommend books</Button>
+          }} variant="outline-secondary">Recommend books</Button>
           <Button onClick={(e) => {
             setMode('popular')
-          }} variant="secondary">Popular books</Button>
+          }} variant="outline-secondary">Popular books</Button>
         </ButtonGroup>
 
       </Container>
