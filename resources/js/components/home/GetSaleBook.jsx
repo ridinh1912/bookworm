@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/esm/Card';
 import { Container } from 'react-bootstrap';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import COVER from '../../../assets/bookcover/CoverPhoto';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -43,7 +44,9 @@ export default function GetSaleBook() {
                     spaceBetween={30}
                     slidesPerView={4}
                     breakpoints={{
-                        576: {
+                        
+                        
+                        0: {
 
                             slidesPerView: 1,
                         },
@@ -68,8 +71,8 @@ export default function GetSaleBook() {
                         return (
 
                             <SwiperSlide key={idx} className='d-flex justify-content-center'>
-                                <div><Card style={{ width: '18rem', height: '24rem' }} >
-                                    <Card.Img variant="top" loading="lazy" src="{{ asset(`/bookcover/${ele.book_cover_photo}.jpg` }}"/>
+                               <Card style={{ width: '17rem', height: '22rem' }} >
+                                    <Card.Img variant="top" src={  ele.book_cover_photo? COVER[ele.book_cover_photo] : COVER['defaultimg'] } style={{ width: '100%', height: '72%' }} />
                                     <Card.Body>
                                         <Card.Title className='text-truncate'>{ele.book_title}</Card.Title>
                                         <Card.Text>
@@ -77,7 +80,7 @@ export default function GetSaleBook() {
                                         </Card.Text>
 
                                     </Card.Body>
-                                </Card></div>
+                                </Card>
                                 
                             </SwiperSlide>
                         )
