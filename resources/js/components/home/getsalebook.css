@@ -14,10 +14,10 @@
   
 }
 .swiper-button-next:hover {
-  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(1.7); 
 }
 .swiper-button-prev:hover {
-  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(1.7); 
 }
   @media screen and (min-width: 640px) {
     .swiper-container {
