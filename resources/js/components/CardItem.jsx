@@ -8,7 +8,7 @@ export default function CardItem(props) {
     return (
         <div>
             <Card style={{ width: '100%', height: '24rem', }} >
-                <Card.Img variant="top" src={ ele.book_cover_photo? COVER[ele.book_cover_photo] : COVER['defaultimg'] } style={{ width: '100%', height: '75%' }} />
+                <Card.Img variant="top" src={ ele.book_cover_photo? COVER[ele.book_cover_photo] : COVER['defaultimg'] } className="img-fluid" style={{ width: '100%', height: '75%' }} />
                 <Card.Body>
 
                     <Card.Title className='text-truncate'>{ele.book_title}</Card.Title>

@@ -1,10 +1,13 @@
 import React from 'react'
 import { Accordion, Card, Nav, ListGroup } from "react-bootstrap";
 import { useState, useEffect } from 'react';
-
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { setCategoryId, setSort } from '../../features/shopSlice';
 
 
 export default function Filter() {
+    
     const [author, setAuthor] = useState([])
     const axios = require('axios');
     const [category, setCategory] = useState([])
@@ -24,7 +27,6 @@ export default function Filter() {
         const sendGetRequestCate = async () => {
             try {
                 const resp = await axios.get('http://127.0.0.1:8000/api/books/category');
-                console.log(resp.data);
                 setCategory(resp.data)
 
             } catch (err) {
@@ -34,34 +36,18 @@ export default function Filter() {
         sendGetRequestAuthors()
         sendGetRequestCate()
     }, [])
+    const dispatch = useDispatch()
+    const handleCategory = (id) => {
+        dispatch(setCategoryId(id))
+    }
+
+
 
     return (
         <div>
-            
-            <br/>
-            <h5>Filter By</h5>
-            
-            <Accordion>
-                <Card>
-                    <Accordion.Toggle as={Card.Header} eventKey="0">
-                        <b>Author</b>
-                    </Accordion.Toggle>
-                    {author.map((ele, idx) => {
-                        return (
 
-                            <Accordion.Collapse eventKey="0" key={idx}>
-                                <ListGroup >
-                                    <ListGroup.Item action style={{ border: 'none' }}>{ele.author_name}</ListGroup.Item>
-                                </ListGroup>
-                            </Accordion.Collapse>
-                        )
-                    })}
-
-                </Card>
-
-
-            </Accordion>
             <br />
+            <h5>Filter By</h5>
             <Accordion>
                 <Card>
                     <Accordion.Toggle variant="light" as={Card.Header} eventKey="0">
@@ -72,7 +58,7 @@ export default function Filter() {
 
                             <Accordion.Collapse eventKey="0" key={idx}>
                                 <ListGroup >
-                                    <ListGroup.Item action style={{ border: 'none' }}>{ele.category_name}</ListGroup.Item>
+                                    <ListGroup.Item onClick={() => { handleCategory(ele.id), dispatch(setSort('filterCategory')) }} action style={{ border: 'none' }}>{ele.category_name}</ListGroup.Item>
                                 </ListGroup>
                             </Accordion.Collapse>
                         )
@@ -83,6 +69,28 @@ export default function Filter() {
 
             </Accordion>
             <br />
+            <Accordion>
+                <Card>
+                    <Accordion.Toggle as={Card.Header} eventKey="0">
+                        <b>Author</b>
+                    </Accordion.Toggle>
+                    {author.map((ele, idx) => {
+                        return (
+
+                            <Accordion.Collapse eventKey="0" key={idx}>
+                                <ListGroup >
+                                    <ListGroup.Item onClick={() => { handleCategory(ele.id), dispatch(setSort('filterAuthor')) }} action style={{ border: 'none' }}>{ele.author_name}</ListGroup.Item>
+                                </ListGroup>
+                            </Accordion.Collapse>
+                        )
+                    })}
+
+                </Card>
+
+
+            </Accordion>
+            <br />
+
             <Accordion>
                 <Card>
                     <Accordion.Toggle as={Card.Header} eventKey="0">
@@ -107,6 +115,6 @@ export default function Filter() {
 
             </Accordion>
         </div>
-        
+
     )
 }
