@@ -52,7 +52,7 @@ class ShopController extends Controller
     public function filter(Request $request){
         $perPage = $request->perPage ?? 5;
         
-        $book=$this->_bookRepository->getBook()->rightJoin('category','book.category_id','=','category.id');
+        $book=$this->_bookRepository->getBook();
         if ($request->filled('author_id')){    
             return $book->where('author_id',$request->author_id)->orderByRaw('final_price ASC')->paginate($perPage);
         }

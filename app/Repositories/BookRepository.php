@@ -63,7 +63,8 @@ class BookRepository extends BaseRepository
     {
         $book=$this->query->rightJoin('author', 'book.author_id','=','author.id')
                     ->leftJoin('discount','discount.book_id','=','book.id')
-                    ->select('book.id','book.book_title','book.book_price','author.author_name','book.book_cover_photo','book.author_id','author.author_name',DB::raw('case 
+                    ->rightJoin('category','book.category_id','=','category.id')
+                    ->select('book.id','book.category_id','book.book_summary','book.book_title','book.book_price','author.author_name','book.book_cover_photo','book.author_id','author.author_name',DB::raw('case 
                     when now() >= discount.discount_start_date and discount.discount_end_date >= now() then discount.discount_price
                     when now() >= discount.discount_start_date and discount.discount_end_date is null then discount.discount_price
                     else book.book_price
