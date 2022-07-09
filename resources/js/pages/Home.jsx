@@ -8,13 +8,10 @@ import GetPopularBook from '../components/home/GetPopularBook';
 import { Container, ToggleButton } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/esm/ButtonGroup';
 
-
-
 export default function Home() {
   const [mode, setMode] = useState('recommended')
   const [book, setBook] = useState([])
   const axios = require('axios');
-
   useEffect(() => {
     const sendGetRequestRec = async () => {
       try {
@@ -32,9 +29,7 @@ export default function Home() {
         const resp = await axios.get('http://127.0.0.1:8000/api/popularbooks');
         console.log(resp.data);
         setBook(resp.data)
-
       } catch (err) {
-
         console.error(err);
       }
     };
@@ -45,7 +40,6 @@ export default function Home() {
       sendGetRequestPop()
     }
   }, [mode])
-
   return (
     <div>
       <NavBar />
@@ -54,13 +48,12 @@ export default function Home() {
       <br /><br /><br />
       <Container className='d-flex justify-content-center'>
         <ButtonGroup size="lg" className="md-2">
-          
           <Button onClick={(e) => {
             setMode('recommended')
-          }} variant="outline-secondary">Recommend books</Button>
+          }} variant="outline-secondary" style={{opacity:'70%'}}>Recommend books</Button>
           <Button onClick={(e) => {
             setMode('popular')
-          }} variant="outline-secondary">Popular books</Button>
+          }} style={{opacity:'70%'}} variant="outline-secondary">&nbsp;&nbsp;&nbsp;Popular books&nbsp;&nbsp;&nbsp;&nbsp;</Button>
         </ButtonGroup>
 
       </Container>
@@ -69,10 +62,9 @@ export default function Home() {
           < GetRecommendBook book={book} />
           :
           <GetPopularBook book={book} />
-
       }
+      <br/><br/><br/>
       <Footer />
-
     </div>
   )
 }

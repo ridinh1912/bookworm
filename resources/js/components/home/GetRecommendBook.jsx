@@ -4,11 +4,12 @@ import { Row, Col, Container, Card } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import './getsalebook.css'
 import CardItem from '../CardItem';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 export default function GetRecommendBook(props) {
     const {book} = props
-    console.log(book)
-    
+    const dispatch=useDispatch()
     return (
         <>
         <br/>
@@ -18,7 +19,9 @@ export default function GetRecommendBook(props) {
             {book.map((ele, idx) => {
                     return (
                         <Col key={idx} xl={3} lg={4}  md={6}  xs={12}>
-                            <CardItem ele={ele} />
+                            <Link to={`/product/${ele.id}`}  style={{textDecoration:'none' ,color:'black'}}>
+                            <CardItem ele={ele}/>
+                            </Link>
                             <br/> 
                         </Col>
                     )

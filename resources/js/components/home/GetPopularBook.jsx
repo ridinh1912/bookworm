@@ -5,9 +5,12 @@ import React, { useEffect, useState } from 'react';
 import COVER from '../../../assets/bookcover/CoverPhoto';
 import './getsalebook.css'
 import CardItem from '../CardItem';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export default function GetPopularBook(props) {
     const {book} = props
+    const dispatch=useDispatch()
     return (
         <>
         <br/>
@@ -17,8 +20,9 @@ export default function GetPopularBook(props) {
             {book.map((ele, idx) => {
                     return (
                         <Col key={idx} xl={3} lg={4}  md={6}  xs={12}>
-                            <CardItem ele={ele}/>
-                            <br/> 
+                            <Link to={`/product/${ele.id}`} style={{textDecoration:'none' ,color:'black'}}>
+                            <CardItem ele={ele} />
+                            </Link>
                         </Col>
                     )
                 })}
