@@ -14,28 +14,34 @@ import './getsalebook.css';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setBookID } from '../../features/shopSlice';
+import { Skeleton } from '@mui/material';
 
 export default function GetSaleBook() {
     const [book, setBook] = useState([])
     const axios = require('axios');
-    // const [isLoading,setIsloading]=(true)
+
+    const [isLoading, setIsloading] = useState(true)
 
     useEffect(() => {
         const sendGetRequest = async () => {
 
             try {
                 const resp = await axios.get('http://127.0.0.1:8000/api/books');
-                console.log(resp.data);
-                setBook(resp.data)
+
+                await setBook(resp.data)
+                setIsloading(false)
+
+
             } catch (err) {
 
                 console.log(err)
             }
+
         };
         sendGetRequest()
     }, [])
-    const dispatch=useDispatch()
-  
+
+
     return (
         <>
             <Container>
@@ -43,7 +49,7 @@ export default function GetSaleBook() {
                     <Col>
                         <h4>On Sale</h4>
                     </Col>
-                    <Col className='d-flex justify-content-end'>
+                    <Col className='d-flex justify-content-end' style={{ opacity: '90%' }}>
                         <a href='/shop'>
                             <Button variant="secondary" >View All</Button>
                             <br /> <br />
@@ -64,7 +70,7 @@ export default function GetSaleBook() {
 
                             slidesPerView: 1,
                         },
-                        
+
                         705: {
 
                             slidesPerView: 2,
@@ -85,23 +91,31 @@ export default function GetSaleBook() {
                 >
                     {book.map((ele, idx) => {
                         return (
-                            
+
 
                             <SwiperSlide key={idx} className='d-flex justify-content-center'>
-                                <Container className='p-1'> 
-                                
-                                    <Link to={`/product/${ele.id}`} style={{textDecoration:'none' ,color:'black'}}>
-                                    <Card style={{ width: '100%', height: '24rem', }} className='cardItem'>
-                                        <Card.Img variant="top" src={ele.book_cover_photo ? COVER[ele.book_cover_photo] : COVER['defaultimg']} className="img-fluid" style={{ width: '100%', height: '70%' }} />
-                                        <Card.Body style={{ width: '100%', height: '17%' }}>
+                                <Container className='p-1'>
+                                    {isLoading ? (
+                                        <Skeleton variant="circular">
+                                            <Skeleton /> : 'h1'
+                                        </Skeleton>
+                                    ) :
+                                        <div>
 
-                                            <Card.Title className='text-truncate'>{ele.book_title} <p style={{ fontSize: '15px', color: 'gray' }}>{ele.author_name}</p></Card.Title>
-                                        </Card.Body>
-                                        {
-                                            ele.final_price < ele.book_price ? (<Card.Footer style={{ width: '100%', height: '13%', fontSize: '22px' }}><b>{ele.final_price}$</b>&nbsp;&nbsp;&nbsp;<span style={{ color: 'grey', fontSize: '17px', textDecoration: 'line-through' }}><b>{ele.book_price}$</b></span></Card.Footer>) : (<Card.Footer style={{ width: '100%', height: '13%', fontSize: '22px' }}><b>{ele.final_price}$</b></Card.Footer>)
-                                        }
-                                    </Card>
-                                    </Link>
+                                            <Link to={`/product/${ele.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+                                                <Card style={{ width: '100%', height: '24rem', }} className='cardItem'>
+                                                    <Card.Img variant="top" src={ele.book_cover_photo ? COVER[ele.book_cover_photo] : COVER['defaultimg']} className="img-fluid" style={{ width: '100%', height: '70%' }} />
+                                                    <Card.Body style={{ width: '100%', height: '17%' }}>
+
+                                                        <Card.Title className='text-truncate'>{ele.book_title} <p style={{ fontSize: '15px', color: 'gray' }}>{ele.author_name}</p></Card.Title>
+                                                    </Card.Body>
+                                                    {
+                                                        ele.final_price < ele.book_price ? (<Card.Footer style={{ width: '100%', height: '13%', fontSize: '22px' }}><b>{ele.final_price}$</b>&nbsp;&nbsp;&nbsp;<span style={{ color: 'grey', fontSize: '17px', textDecoration: 'line-through' }}><b>{ele.book_price}$</b></span></Card.Footer>) : (<Card.Footer style={{ width: '100%', height: '13%', fontSize: '22px' }}><b>{ele.final_price}$</b></Card.Footer>)
+                                                    }
+                                                </Card>
+                                            </Link>
+                                        </div>}
+
                                 </Container>
 
                             </SwiperSlide>

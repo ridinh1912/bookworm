@@ -8,7 +8,7 @@ import Footer from '../components/Footer'
 
 export default function About() {
   return (
-    <>
+    <div>
 
       <NavBar />
       <Container className='container-title'>
@@ -44,7 +44,7 @@ export default function About() {
       <Footer />
      
 
-    </>
+    </div>
 
   )
 }

@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import GetSaleBook from '../components/home/GetSaleBook';
 import GetRecommendBook from '../components/home/GetRecommendBook';
 import GetPopularBook from '../components/home/GetPopularBook';
-import { Container, ToggleButton } from 'react-bootstrap';
+import { Container, Row, ToggleButton } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/esm/ButtonGroup';
 
 export default function Home() {
@@ -43,19 +43,21 @@ export default function Home() {
   return (
     <div>
       <NavBar />
-      <br /><br />
+      <br />
       <GetSaleBook />
-      <br /><br /><br />
+      <br /><br />
       <Container className='d-flex justify-content-center'>
+        <Row>
+        <div><h4 className='d-flex justify-content-center'>Featured Books</h4></div>
         <ButtonGroup size="lg" className="md-2">
           <Button onClick={(e) => {
             setMode('recommended')
-          }} variant="outline-secondary" style={{opacity:'70%'}}>Recommend books</Button>
+          }} variant="outline-secondary" style={{opacity:'80%'}}>Recommend books</Button>
           <Button onClick={(e) => {
             setMode('popular')
-          }} style={{opacity:'70%'}} variant="outline-secondary">&nbsp;&nbsp;&nbsp;Popular books&nbsp;&nbsp;&nbsp;&nbsp;</Button>
+          }} style={{opacity:'80%'}} variant="outline-secondary">&nbsp;&nbsp;&nbsp;Popular books&nbsp;&nbsp;&nbsp;&nbsp;</Button>
         </ButtonGroup>
-
+        </Row>
       </Container>
       {
         mode === 'recommended' ?

@@ -23,6 +23,7 @@ export default function GetPopularBook(props) {
                             <Link to={`/product/${ele.id}`} style={{textDecoration:'none' ,color:'black'}}>
                             <CardItem ele={ele} />
                             </Link>
+                            <br/>
                         </Col>
                     )
                 })}
