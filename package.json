@@ -24,6 +24,9 @@
         "sass-loader": "^12.1.0"
     },
     "dependencies": {
+        "@emotion/react": "^11.9.3",
+        "@emotion/styled": "^11.9.3",
+        "@mui/material": "^5.8.7",
         "@reduxjs/toolkit": "^1.8.3",
         "react-router-dom": "^6.3.0",
         "swiper": "^8.2.6"
