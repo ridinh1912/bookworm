@@ -5,6 +5,8 @@ export const shopSlice = createSlice({
   initialState: {
     id: 0,
     sort: 'sale',
+    book_id:0,
+    rating_star:0
     
   },
   reducers: {
@@ -19,12 +21,15 @@ export const shopSlice = createSlice({
     },
     setBookID:  (state, action) => {
       state.id = action.payload
+    },
+    setStar:  (state, action) => {
+      state.rating_star = action.payload
     }
   }
 })
 
 
-export const { setCategoryId,setSort,setAuthorID,setBookID } = shopSlice.actions
+export const { setCategoryId,setSort,setAuthorID,setBookID,setStar } = shopSlice.actions
 
 
 export default shopSlice.reducer

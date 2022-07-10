@@ -3,7 +3,7 @@ import { Accordion, Card, Nav, ListGroup } from "react-bootstrap";
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { setCategoryId, setSort } from '../../features/shopSlice';
+import { setCategoryId, setSort, setStar } from '../../features/shopSlice';
 
 
 export default function Filter() {
@@ -40,9 +40,7 @@ export default function Filter() {
     const handleCategory = (id) => {
         dispatch(setCategoryId(id))
     }
-
-
-
+    
     return (
         <div>
 
@@ -63,10 +61,7 @@ export default function Filter() {
                             </Accordion.Collapse>
                         )
                     })}
-
                 </Card>
-
-
             </Accordion>
             <br />
             <Accordion>
@@ -84,35 +79,27 @@ export default function Filter() {
                             </Accordion.Collapse>
                         )
                     })}
-
                 </Card>
-
-
             </Accordion>
             <br />
 
             <Accordion>
                 <Card>
                     <Accordion.Toggle as={Card.Header} eventKey="0">
-                        <b>Rating reviews</b>
+                    <b>
+                        Rating reviews
+                        </b>
                     </Accordion.Toggle>
-
-
                     <Accordion.Collapse eventKey="0">
                         <ListGroup >
-                            <ListGroup.Item action style={{ border: 'none' }}>{1} Star</ListGroup.Item>
-                            <ListGroup.Item action style={{ border: 'none' }}>{2} Star</ListGroup.Item>
-
-                            <ListGroup.Item action style={{ border: 'none' }}>{3} Star</ListGroup.Item>
-                            <ListGroup.Item action style={{ border: 'none' }}>{4} Star</ListGroup.Item>
-                            <ListGroup.Item action style={{ border: 'none' }}>{5} Star</ListGroup.Item>
-
+                            <ListGroup.Item onClick={() => {  dispatch(setStar(1)),dispatch(setSort('filterStar'))}} action style={{ border: 'none' }}>{1} Star</ListGroup.Item>
+                            <ListGroup.Item onClick={() => {  dispatch(setStar(2)),dispatch(setSort('filterStar'))}} action style={{ border: 'none' }}>{2} Star</ListGroup.Item>
+                            <ListGroup.Item onClick={() => {  dispatch(setStar(3)),dispatch(setSort('filterStar'))}} action style={{ border: 'none' }}>{3} Star</ListGroup.Item>
+                            <ListGroup.Item onClick={() => {  dispatch(setStar(4)),dispatch(setSort('filterStar'))}} action style={{ border: 'none' }}>{4} Star</ListGroup.Item>
+                            <ListGroup.Item onClick={() => {  dispatch(setStar(5)),dispatch(setSort('filterStar'))}} action style={{ border: 'none' }}>{5} Star</ListGroup.Item>
                         </ListGroup>
                     </Accordion.Collapse>
-
                 </Card>
-
-
             </Accordion>
         </div>
 
