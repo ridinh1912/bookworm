@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
 use Illuminate\Http\Request;
 use App\Repositories\BookRepository;
 use Illuminate\Http\Response;
-
+use Illuminate\Support\Facades\DB;
+use App\Models\Book;
 
 class ShopController extends Controller
 {
@@ -21,15 +20,9 @@ class ShopController extends Controller
     public function sortByOnSale(Request $request)
     {
         $perPage = $request->perPage ?? 5;
-        if($request->filled('author_id')){    
-            return $this->_bookRepository->getDiscountBook()->where('author_id','=',$request->author_id)->orderByRaw("discount.discount_price ASC")->paginate($perPage);
-        }
-        else if ($request->filled('category_id')){
-            return response($this->_bookRepository->getDiscountBook()->where('category_id',$request->category_id)->orderByRaw("discount.discount_price ASC")->paginate($perPage));
-        }
-        else{
-            return response($this->_bookRepository->getDiscountBook()->orderByRaw("discount.discount_price ASC")->paginate($perPage)); 
-        }
+        
+        return response($this->_bookRepository->getDiscountBook()->orderByRaw("discount.discount_price ASC")->paginate($perPage)); 
+        
         
         
     }
@@ -62,6 +55,8 @@ class ShopController extends Controller
         
         
     }
+
+    
     public function getBookByID(Request $request)
     {
         return response($this->_bookRepository->getBook()->where('book.id',$request->input('id'))->get());
@@ -70,8 +65,15 @@ class ShopController extends Controller
     {
         return response($this->_bookRepository->getAuthor());
     }
+    
     public function getCategory()
     {
         return response($this->_bookRepository->getCategory());
+    }public function getBookByRatingStar(Request $request)
+    {
+        $perPage = $request->perPage ?? 5;
+        return response($this->_bookRepository->getBookByRatingStars($request)->paginate($perPage));
     }
+    
+    
 }

@@ -17,7 +17,7 @@ class ReviewRepository extends BaseRepository
     }
     public function getReviewByID(){
         $review=$this->query->rightJoin('book','book.id','review.book_id')
-            ->select('book.id',DB::raw('ROUND(AVG(rating_start),1) as AR'),'review.review_title', 'review.review_details','review.rating_start','review.review_date')
+            ->select('book.id',DB::raw('ROUND(AVG(rating_start),1) as ar'),'review.review_title', 'review.review_details','review.rating_start','review.review_date')
             ->groupBy('book.id','review.review_title' ,'review.review_details','review.rating_start','review.review_date')
             ->orderBy('review.rating_start','desc');
         return $review;
