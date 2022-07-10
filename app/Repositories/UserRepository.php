@@ -4,7 +4,6 @@ namespace App\Repositories;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,15 +38,15 @@ class UserRepository extends BaseRepository
     public function login(Request $request){
         $field=$request->validate(
             [
-                'email'=>'required|string',
+                'email'=>'required|email',
                 'password'=>'required|string'
             ]
         );
         $user=User::where('email',$field['email'])->first();
         
         if(!$user || !Hash::check($field['password'],$user->password)){
-            return response([
-                'message'=>'Bad creds'
+            return response()->json([
+                'message'=>'Wrong password'
             ],401);
         }
         $token=$user->createToken('myapptoken')->plainTextToken;
@@ -55,10 +54,14 @@ class UserRepository extends BaseRepository
             'user'=> $user,
             'token'=>$token
         ];
-        return response($response,201);
+        return response()->json($response);
     }
     public function logout(Request $request){
         auth()->user()->tokens()->delete();
         return ['message' => 'logged out'];
+    }
+    public function getUserByToken(Request $request){
+        $user=auth()->user();
+        return $user;
     }
 }

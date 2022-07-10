@@ -15,12 +15,15 @@ class AuthController extends Controller
         $this->_userRepository = $userRepository;
     }
     public function register(Request $request){
-        return response($this->_userRepository->register($request));
+        return $this->_userRepository->register($request);
     }
     public function login(Request $request){
-        return response($this->_userRepository->login($request));
+        return $this->_userRepository->login($request);
+    }
+    public function getUserByToken(Request $request){
+        return $this->_userRepository->getUserByToken($request);
     }
     public function logout(Request $request){
-        return response($this->_userRepository->logout($request));
+        return $this->_userRepository->logout($request);
     }
 }
