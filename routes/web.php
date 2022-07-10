@@ -24,6 +24,9 @@ Route::get('/about', function () {
 Route::get('/shop', function () {
     return view('welcome');
 });
-Route::get('/shop/product', function () {
+Route::get('/product/{id}', function () {
+	return view('welcome');
+})->where('id' ,'[0-9]+');
+Route::get('/login', function () {
     return view('welcome');
 });
