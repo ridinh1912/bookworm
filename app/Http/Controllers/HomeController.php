@@ -28,7 +28,7 @@ class HomeController extends Controller
     }
     public function getPopularBook()
     {
-        return response($this->_bookRepository->getPopularBook()->orderBy('final_price')->limit(8)->get());
+        return response($this->_bookRepository->getPopularBook()->limit(8)->get());
     }
     
 
