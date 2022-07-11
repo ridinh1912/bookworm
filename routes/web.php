@@ -30,3 +30,6 @@ Route::get('/product/{id}', function () {
 Route::get('/login', function () {
     return view('welcome');
 });
+Route::get('/cart', function () {
+    return view('welcome');
+});

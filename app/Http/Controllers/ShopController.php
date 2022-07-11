@@ -74,6 +74,10 @@ class ShopController extends Controller
         $perPage = $request->perPage ?? 5;
         return response($this->_bookRepository->getBookByRatingStars($request)->paginate($perPage));
     }
-    
+    public function getReviewByID(Request $request)
+    {
+        $perPage = $request->perPage ?? 5;
+        return response($this->_bookRepository->getReviewByID()->paginate($perPage));
+    }
     
 }

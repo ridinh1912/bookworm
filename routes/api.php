@@ -42,7 +42,8 @@ Route::get('books/filter/star', [ShopController::class, 'getBookByRatingStar']);
 Route::get('books/detail', [ShopController::class, 'getBookByID']);
 Route::get('books/authors', [ShopController::class, 'getAuthorName']);
 Route::get('books/category', [ShopController::class, 'getCategory']);
-Route::get('books/reviews/{sort?}', [ProductController::class, 'getReviewByID']);
+Route::get('books/reviews', [ProductController::class, 'getReviewByID']);
+
 
 
 
