@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import COVER from '../../../assets/bookcover/CoverPhoto'
 import { Image } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
+import { addToCart } from '../../features/product'
 
 
 export default function InfoBook() {
@@ -16,7 +17,9 @@ export default function InfoBook() {
   useEffect(() => {
     const sendGetRequestBookDetail = async () => {
       try {
-        const resp = await axios.get('http://127.0.0.1:8000/api/books/detail', { params: { 'id': id } });
+        const resp = await axios.get('http://127.0.0.1:8000/api/books/detail', { params: { 'id': id } });setCategoryId: (state, action) => {
+      state.id = action.payload
+    },
         console.log(resp.data[0]);
         setBook(resp.data[0]);
       } catch (err) {
@@ -25,6 +28,7 @@ export default function InfoBook() {
     };
     sendGetRequestBookDetail()
   }, [id])
+  const dispatch = useDispatch()
   return (
     <div><Container>
       <Row>
@@ -71,7 +75,7 @@ export default function InfoBook() {
                 </>)}    
                 </ButtonGroup>
                 <br/>
-                <Button style={{opacity:'70%', width:'100%'}} variant="secondary"><b>Add to cart</b></Button>
+                <Button style={{opacity:'70%', width:'100%'}} variant="secondary" onClick={(()=> dispatch(addToCart({id:id,counter:counter, title:book.book_title,price:book.book_price,pic:book.book_cover_photo})))}><b>Add to cart</b></Button>
               </Card.Body>
             </Card>
           </Container>
